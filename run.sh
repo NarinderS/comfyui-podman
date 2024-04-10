@@ -9,4 +9,5 @@ podman run \
     --device nvidia.com/gpu=all \
     -ti \
     -v ./ComfyUI:/ComfyUI \
+    -p 8080:8080 \
     $CONTAINER_NAME
