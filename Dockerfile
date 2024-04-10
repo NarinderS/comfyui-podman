@@ -7,7 +7,7 @@ ENV VENV=/venv
 RUN sed -i 's/#ParallelDownloads = 5/ParallelDownloads = 5/g' /etc/pacman.conf
 RUN --mount=type=cache,target=/var/cache/pacman/pkg \
     pacman -Syu --noconfirm && \
-    pacman -S --needed --noconfirm fish python python-pip python-opencv git
+    pacman -S --needed --noconfirm python python-pip python-opencv git
 
 COPY ./ComfyUI/requirements.txt /requirements.txt
 RUN --mount=type=cache,target=/root/.cache/pip \
