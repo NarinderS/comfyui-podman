@@ -1,0 +1,11 @@
+services:
+  comfyui:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./ComfyUI:/ComfyUI
+    devices:
+      - nvidia.com/gpu=all
+    stdin_open: true
+    tty: true

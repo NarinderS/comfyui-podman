@@ -1,20 +1,15 @@
-FROM archlinux:base-devel
+FROM docker.io/continuumio/miniconda3:latest
 
 ENV PIP_PREFER_BINARY=1
+ENV PIP_ROOT_USER_ACTION=ignore
 ENV ROOT=/ComfyUI
-ENV VENV=/venv
 
-RUN sed -i 's/#ParallelDownloads = 5/ParallelDownloads = 5/g' /etc/pacman.conf
-RUN --mount=type=cache,target=/var/cache/pacman/pkg \
-    pacman -Syu --noconfirm && \
-    pacman -S --needed --noconfirm python python-pip python-opencv git
-
-COPY ./ComfyUI/requirements.txt /requirements.txt
+RUN --mount=type=cache,target=/opt/conda/pkgs \
+    conda install -y python=3.11
+    
+COPY ComfyUI/requirements.txt /requirements.txt
 RUN --mount=type=cache,target=/root/.cache/pip \
-    python -m venv --system-site-packages ${VENV} && \
-    source ${VENV}/bin/activate && \
-    pip install -U -r requirements.txt 
+    pip install -U -r requirements.txt
 
 WORKDIR ${ROOT}
-COPY ./container_entrypoint.sh /container_entrypoint.sh
-CMD ["bash", "/container_entrypoint.sh"]
+CMD ["python", "-u", "main.py", "--listen", "--port", "8080", "--preview-method", "auto"]
