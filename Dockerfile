@@ -4,6 +4,11 @@ ENV PIP_PREFER_BINARY=1
 ENV PIP_ROOT_USER_ACTION=ignore
 ENV ROOT=/ComfyUI
 
+RUN --mount=type=cache,target=/var/cache/apt \
+    apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y libgl1
+
 RUN --mount=type=cache,target=/opt/conda/pkgs \
     conda install -y python=3.11
     
