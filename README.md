@@ -10,4 +10,4 @@ Requires a CUDA enabled device and [NVIDIA Container Toolkit](https://docs.nvidi
 
 The comfyui submodule itself can be updated, by doing a `git pull` in the ComfyUI folder, without having to rebuild the container. 
 
-The `ComfyUI` folder is mounted as a volume, so all inputs, outputs and models you put in here will persist.
+The `ComfyUI` folder is mounted as a volume, so all inputs, outputs, models and plugins will persist.
