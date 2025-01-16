@@ -10,7 +10,7 @@ RUN --mount=type=cache,target=/var/cache/apt \
     apt-get install -y libgl1
 
 RUN --mount=type=cache,target=/opt/conda/pkgs \
-    conda install -y python=3.11
+    conda install -y python=3.12
     
 COPY ComfyUI/requirements.txt /requirements.txt
 RUN --mount=type=cache,target=/root/.cache/pip \
